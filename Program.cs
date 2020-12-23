@@ -93,6 +93,10 @@ namespace NtfsList
                     
                     bool did = false;
                     h.DangerousAddRef(ref did);
+                    
+                    // MSDN claims DOS device path syntax supported in .NET Framework 4.6.2 and .NET Core 5+
+                    //var stream = new System.IO.FileStream(prop.SnapshotDeviceObject, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+                    // but it doesn't work when used below.
 
                     try
                     {
