@@ -81,8 +81,18 @@ namespace NtfsList
                         CreationDisposition.OPEN_EXISTING, CreateFileFlags.FILE_ATTRIBUTE_NORMAL, new SafeObjectHandle()
                     );
 
+                    if (h.IsInvalid)
+                        Console.WriteLine("Handle is invalid");
+                    Console.WriteLine("Handle: {0}", h.DangerousGetHandle());
+
                     Console.WriteLine("Volume Shadow: {0}", prop.SnapshotDeviceObject);
                     var stream = new System.IO.FileStream(new SafeFileHandle(h.DangerousGetHandle(), true), System.IO.FileAccess.Read);
+
+                    if (!stream.CanRead)
+                        Console.WriteLine("Can't read from stream");
+                    
+                    bool did = false;
+                    h.DangerousAddRef(ref did);
 
                     try
                     {
